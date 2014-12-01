@@ -1,6 +1,7 @@
 from Tkinter import *
 root = Tk()
 drawpad = Canvas(root, width=800,height=600, background='black')
+square = drawpad.create_rectangle(398,590,404,596, fill="black")
 player = drawpad.create_rectangle(398,590,404,596, fill="green")
 enemy1 = drawpad.create_rectangle(50,50,100,60, fill="red")
 enemy2 = drawpad.create_rectangle(250,250,300,260, fill="red")
@@ -47,11 +48,12 @@ class myApp(object):
         global direction2
         global direction3
         global player
+        global square
         x1,y1,x2,y2 = drawpad.coords(enemy1)
         ex1,ey1,ex2,ey2 = drawpad.coords(enemy2)
         tx1,ty1,tx2,ty2 = drawpad.coords(enemy3)
         px1,py1,px2,py2 = drawpad.coords(player)
-
+        bx1, by1, bx2, by2 = drawpad.coords(square)
         if x2 > 800:
             direction1 = - 5
         elif x1 < 0:
@@ -79,7 +81,8 @@ class myApp(object):
                 self.dead = True
                 self.lives = self.lives - 1
                 self.livesTxt.configure(text=self.lives)   
-                
+        else:
+            drawpad.move(player, bx1 - px1, by1 - py1)          
         
                        
                  
