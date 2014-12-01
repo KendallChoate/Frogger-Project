@@ -79,8 +79,11 @@ class myApp(object):
                 self.dead = True
                 self.lives = self.lives - 1
                 self.livesTxt.configure(text=self.lives)   
-
-                    
+                
+        
+                       
+                 
+                            
     def key(self,event):
         global player
         global drawpadheight
