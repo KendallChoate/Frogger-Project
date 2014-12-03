@@ -1,5 +1,6 @@
 from Tkinter import *
 root = Tk()
+#Added needed information
 drawpad = Canvas(root, width=800,height=600, background='black')
 square = drawpad.create_rectangle(398,590,404,596, fill="black")
 player = drawpad.create_rectangle(398,590,404,596, fill="green")
@@ -54,6 +55,7 @@ class myApp(object):
         global direction3
         global player
         global square
+        #Made enemies move
         x1,y1,x2,y2 = drawpad.coords(enemy1)
         ex1,ey1,ex2,ey2 = drawpad.coords(enemy2)
         tx1,ty1,tx2,ty2 = drawpad.coords(enemy3)
@@ -78,7 +80,7 @@ class myApp(object):
         drawpad.move(enemy2, direction2, 0)
         drawpad.move(enemy3, direction3, 0)
         #drawpad.after(5,self.animate)
-        
+        #Took away lives
         didWeHit = self.collisionDetect()
         if didWeHit == True:
             if self.lives > 0:
@@ -86,7 +88,7 @@ class myApp(object):
                 self.lives = self.lives - 1
                 self.livesTxt.configure(text=self.lives)   
             drawpad.move(player, bx1 - px1, by1 - py1)          
-        
+        #Stopped the enemies from moving if you lost
         if self.lives > 0:
             drawpad.after(10,self.animate)
         
@@ -98,10 +100,10 @@ class myApp(object):
         global drawpadheight
         global drawpadwidth
         px1, py1, px2, py2 = drawpad.coords(player)
-        if event.char == "w":
-            if (py1 > 0):
-                drawpad.move(player,0,-4)
-        #Added ASD movement and boundary detection
+        #Added WASD movement and boundary detectionif event.char == "w":
+        if (py1 > 0):
+            drawpad.move(player,0,-4)
+        
         if event.char == "s":
             if (py2 < 600):
                 drawpad.move(player,0,4)
@@ -123,6 +125,7 @@ class myApp(object):
                 x1,y1,x2,y2 = drawpad.coords(enemy1)
                 ex1,ey1,ex2,ey2 = drawpad.coords(enemy2)
                 tx1,ty1,tx2,ty2 = drawpad.coords(enemy3)
+                #Added collision detection to enemies and player
                 if (px1 >= tx1 and px2 <= tx2) and (py1 >= ty1 and py2 <= ty2):
                     return True
                 elif (px1 >= x1 and px2 <= x2) and (py1 >= y1 and py2 <= y2):
