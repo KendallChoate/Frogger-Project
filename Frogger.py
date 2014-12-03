@@ -27,6 +27,11 @@ class myApp(object):
         self.label1 = Label(root, text=self.prompt, width=len(self.prompt), bg='green')
         self.label1.pack()
 
+        self.prompt = "0 lives = GAME OVER"
+        
+        self.label2 = Label(root, text=self.prompt, width=len(self.prompt), bg='green')
+        self.label2.pack()
+        
         self.lives = 5
         
         self.livesTxt = Label(root, text=str(self.lives), width=len(str(self.lives)), bg='green')
@@ -75,14 +80,15 @@ class myApp(object):
         #drawpad.after(5,self.animate)
         
         didWeHit = self.collisionDetect()
-        if didWeHit == False:
-            drawpad.after(10,self.animate)
+        if didWeHit == True:
             if self.lives > 0:
                 self.dead = True
                 self.lives = self.lives - 1
                 self.livesTxt.configure(text=self.lives)   
-        else:
             drawpad.move(player, bx1 - px1, by1 - py1)          
+        
+        if self.lives > 0:
+            drawpad.after(10,self.animate)
         
                        
                  
