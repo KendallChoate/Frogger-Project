@@ -1,6 +1,6 @@
 from Tkinter import *
 root = Tk()
-#Added needed information
+#Information about player and enemies
 drawpad = Canvas(root, width=800,height=600, background='black')
 square = drawpad.create_rectangle(398,590,404,596, fill="black")
 player = drawpad.create_rectangle(398,590,404,596, fill="green")
@@ -10,6 +10,7 @@ enemy3 = drawpad.create_rectangle(450,450,500,460, fill="red")
 dead = False
 drawpadwidth = 800
 drawpadheight = 600
+#Gave enemies different speeds and directions
 direction1 = 5
 direction2 = -7
 direction3 = 9
@@ -22,24 +23,28 @@ class myApp(object):
         self.myContainer1 = Frame(parent)
         self.myContainer1.pack()
         
-        # Enter my text
-        self.prompt = "Lives left :"
+        #Text announcing rules and how many lives are left
+        self.prompt = "Get to the other side to win!"
         
         self.label1 = Label(root, text=self.prompt, width=len(self.prompt), bg='green')
         self.label1.pack()
-
+        
         self.prompt = "0 lives = GAME OVER"
         
         self.label2 = Label(root, text=self.prompt, width=len(self.prompt), bg='green')
         self.label2.pack()
         
+        self.prompt = "Lives left :"
+        
+        self.label3 = Label(root, text=self.prompt, width=len(self.prompt), bg='green')
+        self.label3.pack()
+   
         self.lives = 5
         
         self.livesTxt = Label(root, text=str(self.lives), width=len(str(self.lives)), bg='green')
         self.livesTxt.pack()
         
         self.dead = False
-        # Adding the drawpad, adding the key listener, starting animation
         drawpad.pack()
         root.bind_all('<Key>', self.key)
         self.animate()
@@ -79,7 +84,6 @@ class myApp(object):
         drawpad.move(enemy1, direction1, 0)
         drawpad.move(enemy2, direction2, 0)
         drawpad.move(enemy3, direction3, 0)
-        #drawpad.after(5,self.animate)
         #Took away lives
         didWeHit = self.collisionDetect()
         if didWeHit == True:
@@ -100,9 +104,10 @@ class myApp(object):
         global drawpadheight
         global drawpadwidth
         px1, py1, px2, py2 = drawpad.coords(player)
-        #Added WASD movement and boundary detectionif event.char == "w":
-        if (py1 > 0):
-            drawpad.move(player,0,-4)
+        #Added WASD movement and boundary detection
+        if event.char == "w":
+            if (py1 > 0):
+                drawpad.move(player,0,-4)
         
         if event.char == "s":
             if (py2 < 600):
